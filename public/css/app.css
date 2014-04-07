@@ -1,0 +1,11 @@
+html,
+body {
+  height: 100%;
+}
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+footer p {
+  border-top: 1px solid #484e55;
+}
