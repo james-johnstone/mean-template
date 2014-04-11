@@ -4,15 +4,17 @@ block main-content
 	.navbar.navbar-fixed.top
 		.container
 			.navbar
-				a.navbar-brand(href="/") Eto
-				.navbar-collapse.collapse
-					ul.nav.navbar-nav
-						li.dropdown-open
-							a.dropdown-toggle(href="/") Home
-							a(href="/") Somewhere
+				ul.nav.navbar-nav
+					li.dropdown
+						a.dropdown-toggle(data-toggle="dropdown" href="#") Home 
+							b.caret
+						ul.dropdown-menu
+							li
+								a(href="/") Somewhere
+				div(ng-include="'/partials/auth/navbar-login'")
+
 	section.content
 		div(ng-view)
-	h2= mongoMessage
 
 	footer.container.text-center.navbar.navbar-fixed-bottom
 		p &copy; 2014 Eto

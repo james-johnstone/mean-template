@@ -9,3 +9,9 @@ footer {
 footer p {
   border-top: 1px solid #484e55;
 }
+.navbar-form .form-group {
+  margin-left: 4px;
+}
+.navbar-form button {
+  margin-left: 10px;
+}
