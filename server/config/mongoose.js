@@ -7,4 +7,22 @@ module.exports = function (config) {
     db.once('open', function callback() {
         console.log('eto mongo connected!');
     });
+
+
+    var userSchema = mongoose.Schema({
+        firstName: String,
+        lastName: String,
+        userName: String,
+        email : String
+    });
+
+    var User = mongoose.model('User', userSchema);
+
+    User.find({}).exec(function (err, collection) {
+        if (collection.length === 0) {            
+            User.create({email:'test@test', firstName: 'John', lastName: 'Doe', userName: 'Homer' });
+            User.create({ firstName: 'Adolph', lastName: 'Lincoln', userName: 'Izzac' });
+            User.create({ firstName: 'Dr', lastName: 'Doom', userName: 'Doc' });
+        }
+    });
 }

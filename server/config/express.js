@@ -1,4 +1,5 @@
 ﻿var express = require('express'),
+    passport = require('passport'),
     stylus = require('stylus');
 
 module.exports = function (app, config) {
@@ -12,15 +13,17 @@ module.exports = function (app, config) {
         app.set('view engine', 'jade');
 
         app.use(express.logger('dev'));
+        app.use(express.cookieParser());
         app.use(express.bodyParser());
-
+        app.use(express.session({ secret: 'eto' }));
+        app.use(passport.initialize());
+        app.use(passport.session());
         app.use(stylus.middleware(
             {
                 src: config.rootPath + '/public',
                 compile: compile
             }
         ));
-        console.log('static should be from : ' +config.rootPath + '/public');
         app.use(express.static(config.rootPath + 'public'));
     });
 }
