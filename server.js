@@ -15,7 +15,7 @@ var User = mongoose.model('User');
 passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'},
     function (email, password, done) {
         User.findOne({ email: email }).exec(function (err, user) {
-            if (user) {
+            if (user && user.authenticate(password)) {
                 return done(null, user);
             }
             else {
@@ -34,6 +34,8 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (id, done) {
     User.findOne({ _id: id}).exec(function (err, user) {
         if (user) {
+            user.salt = '';
+            user.hashedPassword = '';
             return done(null, user);
         }
         else{
