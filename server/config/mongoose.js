@@ -34,7 +34,7 @@ module.exports = function (config) {
             salt = createSalt();
             hash = hashPassword('test', salt);
 
-            User.create({email:'test@test', firstName: 'John', lastName: 'Doe', userName: 'Homer', salt:salt, hashedPassword:hash });
+            User.create({email:'jamie@test', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt:salt, hashedPassword:hash });
             User.create({ firstName: 'Adolph', lastName: 'Lincoln', userName: 'Izzac' });
             User.create({ firstName: 'Dr', lastName: 'Doom', userName: 'Doc' });
         }

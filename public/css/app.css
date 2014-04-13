@@ -6,11 +6,12 @@ footer {
   padding-left: 15px;
   padding-right: 15px;
 }
-footer p {
-  border-top: 1px solid #484e55;
+.navbar-form {
+  max-width: 516px;
 }
 .navbar-form .form-group {
   margin-left: 4px;
+  max-width: 203px;
 }
 .navbar-form button {
   margin-left: 10px;
@@ -19,5 +20,5 @@ footer p {
   top: 70px;
 }
 .toast-success {
-  background-color: #13987e;
+  background-colSor: #13987e;
 }
