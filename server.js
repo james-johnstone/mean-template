@@ -31,21 +31,21 @@ passport.serializeUser(function (user, done) {
     }
 });
 
-passport.deserializeUser(function (id, done) {
-    User.findOne({ _id: id}).exec(function (err, user) {
-        if (user) {
-            user.salt = '';
-            user.hashedPassword = '';
-            return done(null, user);
-        }
-        else{
-            return done(null, false);
-        }
-    });
-})
+    passport.deserializeUser(function (id, done) {
+        User.findOne({ _id: id}).exec(function (err, user) {
+            if (user) {
+                user.salt = '';
+                user.hashedPassword = '';
+                return done(null, user);
+            }
+            else{
+                return done(null, false);
+            }
+        });
+    })
 
-require('./server/config/routes')(app);
+    require('./server/config/routes')(app);
 
-app.listen(config.port);
+    app.listen(config.port);
 
-console.log('Listening on port ' + config.port + '...');
+    console.log('Listening on port ' + config.port + '...');
