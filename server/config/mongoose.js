@@ -17,7 +17,7 @@ module.exports = function (config) {
         email: String,
         salt: String,
         hashedPassword: String,
-        isAdmin: Boolean
+        roles: [String]
     });
 
     userSchema.methods = {
@@ -34,9 +34,8 @@ module.exports = function (config) {
             salt = createSalt();
             hash = hashPassword('test', salt);
 
-            User.create({email:'jamie@test', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt:salt, hashedPassword:hash });
-            User.create({ firstName: 'Adolph', lastName: 'Lincoln', userName: 'Izzac' });
-            User.create({ firstName: 'Dr', lastName: 'Doom', userName: 'Doc' });
+            User.create({ email: 'admin@uat.co', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt: salt, hashedPassword: hash, roles: ["admin"] });
+            User.create({email:'user@uat.co', firstName: 'Dr', lastName: 'Doom', userName: 'Doc', salt: salt, hashedPassword: hash, });
         }
     });
 }
