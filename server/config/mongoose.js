@@ -1,5 +1,5 @@
 ﻿var mongoose = require('mongoose'),
-    crypto = require('crypto');
+    userModel = require('../models/user');
 
 module.exports = function (config) {
     mongoose.connect(config.db);
@@ -9,42 +9,6 @@ module.exports = function (config) {
         console.log('eto mongo connected!');
     });
 
+    userModel.createDefaultUsers();
+};
 
-    var userSchema = mongoose.Schema({
-        firstName: String,
-        lastName: String,
-        userName: String,
-        email: String,
-        salt: String,
-        hashedPassword: String,
-        roles: [String]
-    });
-
-    userSchema.methods = {
-        authenticate: function (password) {
-            return hashPassword(password, this.salt) === this.hashedPassword ;
-        }
-    };
-
-    var User = mongoose.model('User', userSchema);
-
-    User.find({}).exec(function (err, collection) {
-        if (collection.length === 0) {
-            var salt, hash;
-            salt = createSalt();
-            hash = hashPassword('test', salt);
-
-            User.create({ email: 'admin@uat.co', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt: salt, hashedPassword: hash, roles: ["admin"] });
-            User.create({email:'user@uat.co', firstName: 'Dr', lastName: 'Doom', userName: 'Doc', salt: salt, hashedPassword: hash, });
-        }
-    });
-}
-
-function createSalt() {
-    return crypto.randomBytes(128).toString('base64');
-}
-
-function hashPassword(password, salt) {
-    var hmac = crypto.createHmac('sha1', salt);
-    return hmac.update(password).digest('hex');
-}

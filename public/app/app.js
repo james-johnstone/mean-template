@@ -11,6 +11,10 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', { templateUrl: '/partials/home/main', controller: 'mainController' })
+        .when('/signup', {
+            templateUrl: '/partials/home/signup',
+            controller: 'signupController'            
+        })
         .when('/admin/users', {
             templateUrl: '/partials/admin/user-list',
             controller: 'adminUsersController',

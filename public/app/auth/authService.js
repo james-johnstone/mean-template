@@ -16,6 +16,20 @@
             });
             return defer.promise;
         },
+
+        createUser: function (newUserData) {
+            var newUser = new userService(newUserData);
+            var defer = $q.defer();
+
+            newUser.$save().then(function () {
+                identity.currentUser = newUser;
+                defer.resolve();
+            }, function (response) {
+                defer.reject(response.data.reason);
+            });
+            return defer.promise;
+        },
+
         logoutUser: function () {
             var defer = $q.defer();
             $http.post('/logout', { logout: true }).then(function () {
@@ -24,6 +38,7 @@
             });
             return defer.promise;
         },
+
         authorizeCurrentUserForRole: function (role) {
             if (identity.isAuthorized(role)) {
                 return true;
