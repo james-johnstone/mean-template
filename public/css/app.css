@@ -22,3 +22,9 @@ footer {
 .toast-success {
   background-colSor: #13987e;
 }
+.top-padding {
+  padding-top: 10px;
+}
+.margin-left {
+  margin-left: 10px;
+}

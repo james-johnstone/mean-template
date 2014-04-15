@@ -29,6 +29,24 @@
             });
             return defer.promise;
         },
+        updateUser: function (userData) {
+            var defer = $q.defer();
+            var clone = new userService();
+
+            angular.extend(clone, userData);
+
+            clone.$update().then(function () {
+                //only update the angular bindings if the current user is updating their own profile.
+                if (identity.currentUser.email === userData.email) {
+                    angular.extend(identity.currentUser, userData);
+                }
+                defer.resolve();
+            }, function (response) {
+                defer.reject(response.data.reason);
+            });
+
+            return defer.promise;
+        },
 
         logoutUser: function () {
             var defer = $q.defer();
@@ -41,6 +59,15 @@
 
         authorizeCurrentUserForRole: function (role) {
             if (identity.isAuthorized(role)) {
+                return true;
+            }
+            else {
+                return $q.reject('not authorized');
+            }
+        },
+
+        authenticateCurrentUser: function () {
+            if (identity.isAuthenticated()) {
                 return true;
             }
             else {

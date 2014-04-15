@@ -14,6 +14,9 @@ var userSchema = mongoose.Schema({
 userSchema.methods = {
     authenticate: function (password) {
         return crypto.hashPassword(password, this.salt) === this.hashedPassword;
+    },
+    hasRole: function (role) {
+        return this.roles.indexOf(role) > -1;
     }
 };
 

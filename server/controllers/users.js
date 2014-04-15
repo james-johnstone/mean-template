@@ -7,6 +7,16 @@ exports.getUsers = function (req, res) {
     });
 };
 
+exports.getUser = function (req, res) {
+    User.findOne({ _id: req.params.id }).exec(function (err, user) {
+        if (err) {
+            res.status(400);
+            return res.send({ reason: err.toString() });
+        }
+        res.send(user);
+    });
+};
+
 exports.createUser = function (req, res, next) {
     var userData = req.body;
     userData.salt = crypto.createSalt();
@@ -26,5 +36,25 @@ exports.createUser = function (req, res, next) {
             }
             res.send(user);
         });
+    });
+};
+
+exports.updateUser = function (req, res) {
+    var userData = req.body;
+
+    if (req.user.email !== userData.email && !req.user.hasRole('admin')) {
+        res.status(403);
+        return res.end();
+    }
+
+    User.update({ email: userData.email }, { $set: userData }, function (err) {
+        if (err) {
+            if (err.toString().indexOf('E11000') > -1) {
+                err = new Error('Username already registered');
+            }
+            res.status(400);
+            return res.send({ reason: err.toString() });
+        }
+        res.send(req.user);
     });
 };
