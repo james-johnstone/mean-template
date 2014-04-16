@@ -36,6 +36,21 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/admin/user-details',
             controller: 'adminUserDetailsController',
             resolve: routeRoleChecks.admin
+        })
+        .when('/admin/words', {
+            templateUrl: '/partials/admin/words-list',
+            controller: 'adminWordsController',
+            resolve: routeRoleChecks.admin
+        })
+        .when('/admin/words/:id', {
+            templateUrl: '/partials/admin/word-details',
+            controller: 'wordDetailsController',
+            resolve: routeRoleChecks.admin
+        })
+        .when('/admin/languages', {
+            templateUrl: '/partials/admin/languages-list',
+            controller: 'languagesController',
+            resolve: routeRoleChecks.admin
         });
 });
 

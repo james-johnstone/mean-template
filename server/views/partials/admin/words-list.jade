@@ -1,0 +1,25 @@
+﻿.container
+	h2 Words	
+	.pull-right
+		form.form-inline
+			.form-group
+				input.form-control(ng-model="searchText", placeholder="Filter")
+			.form-group.margin-left
+				select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+	table.table.table-hover.table-striped
+		thead
+			tr
+				th #
+				th Word
+				th Root Language
+				th Synopsis
+				th Histroy
+				th Edit
+		tr(ng-repeat="word in words | filter:searchText | orderBy:sortOrder")
+			td {{word._id}}
+			td {{word.word}}
+			td {{word.rootLanguage}}
+			td {{word.synopsis}}
+			td {{word.history}}
+			td
+				button.btn.btn-info(ng-click="editWord(word)")

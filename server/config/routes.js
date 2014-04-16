@@ -2,7 +2,11 @@
 var auth = require('./auth'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
-    userController = require('../controllers/users');
+    Word = mongoose.model('Word'),
+    Language = mongoose.model('Language'),
+    userController = require('../controllers/users'),
+    wordController = require('../controllers/words'),
+    languageController = require('../controllers/languages');
 
 module.exports = function (app) {
 
@@ -11,6 +15,12 @@ module.exports = function (app) {
     app.put('/api/users', userController.updateUser);
 
     app.get('/api/users/:id', auth.requiresRole('admin'), userController.getUser);
+
+    app.get('/api/words', auth.requiresRole('admin'), wordController.getWords);
+    app.put('/api/words', wordController.updateWord);
+    app.get('/api/words/:id', auth.requiresRole('admin'), wordController.getWord);
+
+    app.get('/api/languages', auth.requiresRole('admin'), languageController.getLanguages);
 
     app.get('/partials/*', function (req, res) {
         res.render('partials/' + req.params);
