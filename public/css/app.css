@@ -28,3 +28,10 @@ footer {
 .margin-left {
   margin-left: 10px;
 }
+input,
+select {
+  max-width: 320px;
+}
+.inline {
+  display: inline-block;
+}

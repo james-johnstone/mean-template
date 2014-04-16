@@ -41,6 +41,7 @@ exports.createUser = function (req, res, next) {
 
 exports.updateUser = function (req, res) {
     var userData = req.body;
+    delete userData._id;
 
     if (req.user.email !== userData.email && !req.user.hasRole('admin')) {
         res.status(403);

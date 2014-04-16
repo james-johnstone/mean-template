@@ -17,15 +17,13 @@
 						input.form-control(name="userName", type="text", placeholder="User Name", ng-model="user.userName", required)
 				.form-group
 					label.col-md-2.control-label Roles
-				.form-group
-					div(ng-repeat="role in user.roles")
-						.col-md-2
-						.col-md-6
-							input.form-control(type="text", ng-model="role")
-						button.btn.btn-danger(ng-click="removeRole($index)") X
-					.col-md-2 
-						button.btn.btn-success.pull-right(ng-click="addRole()") Add Role
-						
+					.col-md-8
+						div(ng-repeat="role in user.roles track by $index")							
+							select.form-control.inline(ng-model="user.roles[$index]", ng-options="item.value as item.text for item in roleOptions")							
+							button.btn.btn-danger(ng-click="removeRole($index)") X
+				.col-md-2 
+					button.btn.btn-success.pull-right(ng-click="addRole()") Add Role
+												
 				.form-group(hidden)
 					.col-md-6
 						input.form-control(name="email", type="email", placeholder="Email", ng-model="user.email", required)
