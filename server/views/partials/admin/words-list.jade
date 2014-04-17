@@ -16,7 +16,7 @@
 				th Histroy
 				th Edit
 				th Delete
-		tr(ng-repeat="word in words | filter:searchText | orderBy:sortOrder")
+		tr(ng-repeat="word in words | filter:searchText | orderBy:sortOrder | startFrom:currentPage*pageSize | limitTo:pageSize")
 			td {{word._id}}
 			td {{word.word}}
 			td {{word.rootLanguage.name}}
@@ -26,4 +26,14 @@
 				button.btn.btn-info(ng-click="editWord(word)")
 			td
 				button.btn.btn-danger(ng-click="deleteWord(word)") 
+
+	{{currentPage+1}} /{{numberOfPages()}}
+
+	TODO fix this!!
+	button(ng-disabled="currentPage == 0", ng-click="currentPage=currentPage-1")
+        Previous    
+    
+    button(ng-disabled="currentPage >= words.length/pageSize - 1", ng-click="currentPage=currentPage+1")
+        Next   
+
 	button.btn.btn-primary(ng-click="createWord()") Add Word

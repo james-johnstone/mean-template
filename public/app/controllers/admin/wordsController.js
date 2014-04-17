@@ -1,10 +1,16 @@
 ﻿angular.module('app').controller('adminWordsController', function ($scope, wordService, wordResource, $location, appNotifier) {
 
     $scope.words = wordService.query();
-
     $scope.sortOptions = [{ value: "word", text: "sort by word" }, { value: "rootLanguage", text: "sort by root" }];
-
     $scope.sortOrder = $scope.sortOptions[0].value;
+
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+
+    $scope.numberOfPages = function () {
+        return Math.ceil($scope.words.length / $scope.pageSize);
+    }
+
 
     $scope.editWord = function (word) {
         $location.path("/admin/words/" + word._id);
@@ -23,3 +29,10 @@
         });
     };
 })
+
+angular.module('app').filter('startFrom', function () {
+    return function (input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
