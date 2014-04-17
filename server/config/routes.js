@@ -18,12 +18,14 @@ module.exports = function (app) {
 
     app.get('/api/words', auth.requiresRole('admin'), wordController.getWords);
     app.put('/api/words', wordController.updateWord);
+    app.post('/api/words', wordController.createWord);
+    app.delete('/api/words/:id', auth.requiresRole('admin'), wordController.deleteWord);
     app.get('/api/words/:id', auth.requiresRole('admin'), wordController.getWord);
 
     app.get('/api/languages', auth.requiresRole('admin'), languageController.getLanguages);
-    app.put('/api/languages', languageController.updateLanguage)
-    app.post('/api/languages', languageController.createLanguage)
-    app.delete('/api/languages/:id', languageController.deleteLanguage)
+    app.put('/api/languages', auth.requiresRole('admin'), languageController.updateLanguage)
+    app.post('/api/languages', auth.requiresRole('admin'), languageController.createLanguage)
+    app.delete('/api/languages/:id', auth.requiresRole('admin'), languageController.deleteLanguage)
     app.get('/api/languages/:id', auth.requiresRole('admin'), languageController.getLanguage);
 
     app.get('/partials/*', function (req, res) {

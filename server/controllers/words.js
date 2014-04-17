@@ -36,3 +36,29 @@ exports.updateWord = function (req, res) {
         res.send(req.word);
     });
 };
+
+exports.createWord = function (req, res) {
+    var wordData = req.body;
+
+    Word.create(wordData, function (err, word) {
+        if (err) {
+            if (err.toString().indexOf('E11000') > -1) {
+                err = new Error('Word already created');
+            }
+            res.status(400);
+            return res.send({ reason: err.toString() });
+        }
+        res.send(word);
+    });
+};
+
+exports.deleteWord = function (req, res) {
+
+    Word.remove({ _id: req.params.id }, function (err) {
+        if (err) {
+            res.status(400);
+            return res.send({ reason: err.toString() });
+        }
+        res.send(200);
+    });
+};

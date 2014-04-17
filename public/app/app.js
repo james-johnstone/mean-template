@@ -42,6 +42,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             controller: 'adminWordsController',
             resolve: routeRoleChecks.admin
         })
+        .when('/admin/words/new', {
+            templateUrl: '/partials/admin/word-details',
+            controller: 'wordDetailsController',
+            resolve: routeRoleChecks.admin
+        })
         .when('/admin/words/:id', {
             templateUrl: '/partials/admin/word-details',
             controller: 'wordDetailsController',

@@ -15,6 +15,7 @@
 				th Synopsis
 				th Histroy
 				th Edit
+				th Delete
 		tr(ng-repeat="word in words | filter:searchText | orderBy:sortOrder")
 			td {{word._id}}
 			td {{word.word}}
@@ -23,3 +24,6 @@
 			td {{word.history}}
 			td
 				button.btn.btn-info(ng-click="editWord(word)")
+			td
+				button.btn.btn-danger(ng-click="deleteWord(word)") 
+	button.btn.btn-primary(ng-click="createWord()") Add Word
