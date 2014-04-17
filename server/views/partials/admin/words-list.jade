@@ -18,7 +18,7 @@
 		tr(ng-repeat="word in words | filter:searchText | orderBy:sortOrder")
 			td {{word._id}}
 			td {{word.word}}
-			td {{word.rootLanguage}}
+			td {{word.rootLanguage.name}}
 			td {{word.synopsis}}
 			td {{word.history}}
 			td

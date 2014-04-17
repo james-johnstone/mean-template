@@ -13,9 +13,13 @@
 				th Language
 				th Category
 				th Edit
+				th Delete
 		tr(ng-repeat="language in languages | filter:searchText | orderBy:sortOrder")
 			td {{language._id}}
 			td {{language.name}}
 			td {{language.languageCategory}}
 			td
 				button.btn.btn-info(ng-click="editLanguage(language)")
+			td
+				button.btn.btn-danger(ng-click="deleteLanguage(language)") 
+	button.btn.btn-primary(ng-click="createLanguage()") Add Language

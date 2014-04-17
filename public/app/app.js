@@ -51,6 +51,16 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/admin/languages-list',
             controller: 'languagesController',
             resolve: routeRoleChecks.admin
+        })
+        .when('/admin/languages/new', {
+            templateUrl: '/partials/admin/languags-details',
+            controller: 'languageDetailsController',
+            resolve: routeRoleChecks.admin
+        })
+        .when('/admin/languages/:id', {
+            templateUrl: '/partials/admin/languags-details',
+            controller: 'languageDetailsController',
+            resolve: routeRoleChecks.admin
         });
 });
 

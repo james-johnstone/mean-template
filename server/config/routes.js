@@ -21,6 +21,10 @@ module.exports = function (app) {
     app.get('/api/words/:id', auth.requiresRole('admin'), wordController.getWord);
 
     app.get('/api/languages', auth.requiresRole('admin'), languageController.getLanguages);
+    app.put('/api/languages', languageController.updateLanguage)
+    app.post('/api/languages', languageController.createLanguage)
+    app.delete('/api/languages/:id', languageController.deleteLanguage)
+    app.get('/api/languages/:id', auth.requiresRole('admin'), languageController.getLanguage);
 
     app.get('/partials/*', function (req, res) {
         res.render('partials/' + req.params);

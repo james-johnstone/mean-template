@@ -1,0 +1,19 @@
+﻿.container
+	.well
+		form.form-horizontal(name="languageDetailsForm")
+			fieldset
+				legend Language Details
+				.form-group
+					label.col-md-2.control-label Language
+					.col-md-6
+						input.form-control(name="language", type="text", placeholder="language", ng-model="language.name", required)
+				.form-group
+					label.col-md-2.control-label Language Category
+					.col-md-6
+						input.form-control(name="languageCategory", type="text", placeholder="Language Category", ng-model="language.languageCategory")
+				.form-group
+					.col-md-6.col
+						.pull-right
+							button.btn.btn-primary(ng-click="update()", ng-disabled="languageDetailsForm.$invalid") Submit
+							| 
+							a.btn.btn-default(href="/admin/languages") Cancel

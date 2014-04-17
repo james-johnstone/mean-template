@@ -10,7 +10,7 @@
 				.form-group
 					label.col-md-2.control-label Root Language
 					.col-md-6
-						select.form-control(ng-model="rootLanguage", ng-options="option as item.name for item in languages")
+						select.form-control(name="rootLanguage", ng-model="word.rootLanguage", ng-options="item._id as item.name for item in languages")
 							option(value="")
 				.form-group
 					label.col-md-2.control-label Synopsis
@@ -27,13 +27,3 @@
 							button.btn.btn-primary(ng-click="update()", ng-disabled="wordDetailsForm.$invalid") Submit
 							| 
 							a.btn.btn-default(href="/admin/words") Cancel
-	table.table.table-hover.table-striped
-		thead
-			tr
-				th #
-				th Language
-				th Category
-		tr(ng-repeat="language in languages")
-			td {{language._id}}
-			td {{language.name}}
-			td {{language.languageCategory}}

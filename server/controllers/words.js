@@ -1,7 +1,9 @@
 ﻿var Word = require('mongoose').model('Word');
+var Language = require('mongoose').model('Language');
+
 
 exports.getWords = function (req, res) {
-    Word.find({}).exec(function (err, collection) {
+    Word.find({}).populate('rootLanguage').exec(function (err, collection) {
         res.send(collection);
     });
 };
