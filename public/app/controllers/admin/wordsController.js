@@ -9,8 +9,7 @@
 
     $scope.numberOfPages = function () {
         return Math.ceil($scope.words.length / $scope.pageSize);
-    }
-
+    };
 
     $scope.editWord = function (word) {
         $location.path("/admin/words/" + word._id);

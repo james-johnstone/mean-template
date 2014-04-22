@@ -1,0 +1,14 @@
+.container
+    .well
+        h3.text-center select the root language of
+
+        div.game-active-word-container.text-center.border
+            div.game-active-word {{activeWord.word}}
+
+        div.answer-container
+            div(ng-repeat="root in possibleLanguages")
+                .col-md-4.text-center.root-card(ng-class="root._id")
+                    .card.front
+                        button.game-root-language-container.border.front(ng-click="selectRoot(root)") {{root.name}}
+                    .card.back
+                        button.game-root-language-container.border(ng-click="flip(root)", ng-class="root.isRoot ? 'btn-success' : 'btn-danger'")

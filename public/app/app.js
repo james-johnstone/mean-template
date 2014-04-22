@@ -17,7 +17,8 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
     $routeProvider
-        .when('/', { templateUrl: '/partials/home/main', controller: 'mainController' })
+        .when('/', { templateUrl: '/partials/home/main', controller: 'mainController'})
+        .when('/play', {templateUrl: 'partials/game/play', controller: 'gameController'})
         .when('/profile', {
             templateUrl: '/partials/user/user-profile',
             controller: 'userProfileController',
