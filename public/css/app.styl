@@ -99,6 +99,9 @@ input, select
   -moz-transform rotateY(180deg)
   transform rotateY(180deg)
 
+.back button
+  cursor:default
+
 
 .rotate-3d
     -webkit-transform: rotateY(180deg);
@@ -118,6 +121,7 @@ input, select
 
 .answer-container
   min-width 786px
+  min-height: 140px;
 
 .btn-danger
   color: #ffffff;
@@ -129,3 +133,30 @@ input, select
     background-image: linear-gradient(#61dd45, #3cb521 50%, #36a41e);
     background-repeat: no-repeat;
     border: 1px solid #2e8a19;
+
+/*
+.root-cards-animation.ng-hide-add 
+  opacity: 1.0;
+  display: block !important;
+  transition: opacity 1s;
+
+
+.root-cards-animation.ng-hide-add-active 
+  opacity: 0;
+  */
+
+.root-cards-animation.ng-hide-remove 
+	-moz-animation: fadeInDown 1;
+	-o-animation: fadeInDown 1s;
+	-webkit-animation: fadeInDown 1s;
+	animation: fadeInDown 1s;
+
+.root-cards-animation.ng-hide-add 
+	-moz-animation: fadeOutDown 1s;
+	-o-animation: fadeOutDown 1s;
+	-webkit-animation: fadeOutDown 1s;
+	animation: fadeOutDown 1s;
+	display: block !important;
+
+.etymology-container
+	padding-top 20px
