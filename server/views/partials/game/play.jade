@@ -7,13 +7,13 @@
 
 		div.answer-container
 			div.animated.roots-container.root-cards-animation(ng-hide="wordIsAnswered")
-				div(ng-repeat="root in possibleLanguages")
-					.col-md-4.text-center.root-card(flip="root.rootIsSelected")
+				div.col-sm-4.root-container(ng-repeat="root in possibleLanguages")
+					.text-center.root-card(flip="root.rootIsSelected")
 						.card.front
 							button.game-root-language-container.border.front(ng-click="selectRoot(root)") {{root.name}}
 						.card.back
-							button.game-root-language-container.border(ng-click="selectRoot(root)",ng-class="root.isRoot ? 'btn-success' : 'btn-danger'")
-			div.animated.etymology-container.root-cards-animation.text-center(ng-show="wordIsAnswered", fade-out="wordIsLoading")
+							button.game-root-language-container.border(ng-class="root.isRoot ? 'btn-success' : 'btn-danger'")
+			div.animated.etymology-container.root-etymology-animation.text-center(ng-show="wordIsAnswered", fade-out="wordIsLoading")
 				em.well-etymology {{activeWord.synopsis}}
 
 		div word {{currentWordIndex}} of {{words.length}}

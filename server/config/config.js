@@ -11,7 +11,7 @@ module.exports = {
     },
     production:{
         rootPath: rootPath,
-        db: 'mongodb://localhost/eto',
-        port: process.env.PORT || 80
+        db: 'mongodb://eto:1006Mongo@ds033767.mongolab.com:33767/eto',
+        port: process.env.PORT || 3030
     }   
 }
