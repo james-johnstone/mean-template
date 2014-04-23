@@ -51,7 +51,8 @@ exports.updateUser = function (req, res) {
     }
 
     // user profile update must specifically reference nested object properties.
-    if (!!userData.local.hashedPassword) {
+    if (!userData.local.hashedPassword) {
+
         User.update({ _id: userID }, {
             $set:{
                 'local.email': userData.local.email,
