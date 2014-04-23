@@ -7,8 +7,14 @@
 		p
 			button.btn.btn-primary(ng-click="launchGame()")
 				strong Play the Etymology game 
-	.row
-		//.col-md-6
-		//	div(ng-include="'/partials/home/update-feed'")
-		//.col-md-6
-		//	div(ng-include="'/partials/home/comments'")
+
+	.jumbotron.text-center.auth-area(ng-hide="identity.isAuthenticated()")
+		h2
+			.fa.fa-lock
+
+			p Login or Register
+
+			a.btn.btn-default(href="/login")
+				.fa.fa-user &nbsp; Local Login
+			a.btn.btn-default(href="/signup")
+				.fa.fa-user &nbsp; Local Signup

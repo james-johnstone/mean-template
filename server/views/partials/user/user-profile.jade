@@ -1,8 +1,9 @@
 ﻿.container
 	.well
+		h3.fa.fa-user  Local Profile
 		form.form-horizontal(name="profileForm")
 			fieldset
-				legend User Profile
+				legend
 				.form-group
 					label.col-md-2.control-label First Name
 					.col-md-6
@@ -15,9 +16,13 @@
 					label.col-md-2.control-label User Name
 					.col-md-6
 						input.form-control(name="userName", type="text", placeholder="User Name", ng-model="userName", required)
-				.form-group(hidden)
+				.form-group
+					label.col-md-2.control-label Email
 					.col-md-6
 						input.form-control(name="email", type="email", placeholder="Email", ng-model="email", required)
+				.form-group(hidden)
+					.col-md-6
+						input.form-control(name="id", type="text", ng-model="_id", required)
 				.form-group
 					.col-md-6.col
 						.pull-right

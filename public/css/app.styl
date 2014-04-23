@@ -18,6 +18,9 @@ footer
 .toastr-top-right
 	top 70px
 
+.auth-area a
+	margin 4px
+
 .toast-success
 	background-colSor #13987e
 
@@ -77,7 +80,6 @@ input, select
   -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
 
 .root-card
-  width: 32.333333%;
   -webkit-transform-style preserve-3d
   -moz-transform-style preserve-3d
   transform-style preserve-3d
@@ -109,7 +111,7 @@ input, select
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    -webkit-transform-origin-x: 55%;
+    -webkit-transform-origin-x: 50%;
     transform-origin:20% 40%;
     -ms-transform-origin:20% 40%; /* IE 9 */
 
@@ -122,8 +124,8 @@ input, select
   letter-spacing:1px
 
 .answer-container
-  min-width 786px
   min-height: 140px;
+  position: relative;
 
 .btn-danger
   color: #ffffff;
@@ -160,5 +162,23 @@ input, select
 	animation: fadeOutDown 1s;
 	display: block !important;
 
+.root-etymology-animation.ng-hide-remove 
+	-moz-animation: fadeInDown 2s;
+	-o-animation: fadeInDown 2s;
+	-webkit-animation: fadeInDown 2s;
+	animation: fadeInDown 2s;
+
+.root-etymology-animation.ng-hide-add 
+	-moz-animation: fadeOutDown 1s;
+	-o-animation: fadeOutDown 1s;
+	-webkit-animation: fadeOutDown 1s;
+	animation: fadeOutDown 1s;
+	display: block !important;
+
 .etymology-container
 	padding-top 20px
+	position: absolute
+	width: 100%
+
+.root-container
+	min-height 134px

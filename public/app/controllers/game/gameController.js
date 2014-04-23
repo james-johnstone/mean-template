@@ -97,10 +97,10 @@ angular.module('app').directive('fadeOut', function ($animate) {
     return function (scope, element, attrs) {
         scope.$watch(attrs.fadeOut, function (newVal) {
             if (newVal) {
-                $animate.addClass(element, "fade");
+                $animate.addClass(element, "fadeOut");
             }
             else {
-                $animate.removeClass(element, "fade");
+                $animate.removeClass(element, "fadeOut");
             }
         });
     };

@@ -1,8 +1,9 @@
 ﻿.container
 	.well
+		h1.fa.fa-sign-in Sign Up
 		form.form-horizontal(name="signupForm")
 			fieldset
-				legend New User Details
+				legend
 				.form-group
 					.col-md-6
 						input.form-control(name="firstName", type="text", placeholder="First Name", ng-model="firstName")
@@ -21,6 +22,11 @@
 				.form-group
 					.col-md-6.col
 						.pull-right
-							button.btn.btn-primary(ng-click="signup()", ng-disabled="signupForm.$invalid") Submit
+							button.btn.btn-warning(ng-click="signup()", ng-disabled="signupForm.$invalid") Submit
 							| 
 							a.btn.btn-default(href="/") Cancel
+
+		hr
+			
+		p Already have an account? 
+			a(href="/login") Login
