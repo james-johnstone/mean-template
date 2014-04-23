@@ -38,7 +38,7 @@
             clone.$update().then(function () {
                 //only update the angular bindings if the current user is updating their own profile.
                 if (identity.currentUser.local.email === userData.local.email) {
-                    angular.extend(identity.currentUser, userData);
+                    angular.extend(identity.currentUser.local, userData.local);
                 }
                 defer.resolve();
             }, function (response) {
