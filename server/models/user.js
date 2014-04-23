@@ -2,13 +2,15 @@
     crypto = require('../utilities/crypto');
 
 var userSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    userName: { type: String, required: '{PATH} is required', unique: true },
-    email: { type: String, required: '{PATH} is required', lowercase: true, trim: true, unique: true },
-    salt: String,
-    hashedPassword: { type: String, required: 'Password is required' },
-    roles: [String],
+    local: {
+        firstName: String,
+        lastName: String,
+        userName: { type: String, required: '{PATH} is required', unique: true },
+        email: { type: String, required: '{PATH} is required', lowercase: true, trim: true, unique: true },
+        salt: String,
+        hashedPassword: { type: String, required: 'Password is required' },
+        roles: [String]
+    },
     facebook: {
         id: String,
         token: String,
@@ -31,10 +33,10 @@ var userSchema = mongoose.Schema({
 
 userSchema.methods = {
     authenticate: function (password) {
-        return crypto.hashPassword(password, this.salt) === this.hashedPassword;
+        return crypto.hashPassword(password, this.local.salt) === this.local.hashedPassword;
     },
     hasRole: function (role) {
-        return this.roles.indexOf(role) > -1;
+        return this.local.roles.indexOf(role) > -1;
     }
 };
 
@@ -47,8 +49,8 @@ function createDefaultUsers() {
             salt = crypto.createSalt();
             hash = crypto.hashPassword('test', salt);
 
-            User.create({ email: 'admin@uat.co', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt: salt, hashedPassword: hash, roles: ["admin"] });
-            User.create({ email: 'user@uat.co', firstName: 'Dr', lastName: 'Doom', userName: 'Doc', salt: salt, hashedPassword: hash, });
+            User.create({ local: { email: 'admin@uat.co', firstName: 'Jamie', lastName: 'Johnstone', userName: 'Jamie', salt: salt, hashedPassword: hash, roles: ["admin"] } });
+            User.create({local:{ email: 'user@uat.co', firstName: 'Dr', lastName: 'Doom', userName: 'Doc', salt: salt, hashedPassword: hash, }});
         }
     });
 }

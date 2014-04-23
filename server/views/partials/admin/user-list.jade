@@ -17,10 +17,10 @@
 				th Edit
 		tr(ng-repeat="user in users | filter:searchText | orderBy:sortOrder")
 			td {{user._id}}
-			td {{user.firstName}}
-			td {{user.lastName}}
-			td {{user.userName}}
-			td {{user.email}}
+			td {{user.local.firstName}}
+			td {{user.local.lastName}}
+			td {{user.local.userName}}
+			td {{user.local.email}}
 			td
 				button.btn.btn-info(ng-click="editUser(user)")
 	div page {{ currentPage+1 }} / {{numberOfPages()}}

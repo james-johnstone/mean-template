@@ -19,8 +19,8 @@ exports.getUser = function (req, res) {
 
 exports.createUser = function (req, res, next) {
     var userData = req.body;
-    userData.salt = crypto.createSalt();
-    userData.hashedPassword = crypto.hashPassword(userData.password, userData.salt);
+    userData.local.salt = crypto.createSalt();
+    userData.local.hashedPassword = crypto.hashPassword(userData.local.password, userData.local.salt);
 
     User.create(userData, function (err, user) {
         if (err) {
@@ -40,22 +40,46 @@ exports.createUser = function (req, res, next) {
 };
 
 exports.updateUser = function (req, res) {
+    console.log(req.body)
     var userData = req.body;
+    var userID = userData._id;
     delete userData._id;
-
-    if (req.user.email !== userData.email && !req.user.hasRole('admin')) {
+     
+    if (req.user.local.email !== userData.local.email && !req.user.hasRole('admin')) {
         res.status(403);
         return res.end();
     }
 
-    User.update({ email: userData.email }, { $set: userData }, function (err) {
-        if (err) {
-            if (err.toString().indexOf('E11000') > -1) {
-                err = new Error('Username already registered');
+    // user profile update must specifically reference nested object properties.
+    if (!!userData.local.hashedPassword) {
+        User.update({ _id: userID }, {
+            $set:{
+                'local.email': userData.local.email,
+                'local.firstName': userData.local.firstName,
+                'local.lastName': userData.local.lastName,
+                'local.userName': userData.local.userName,
+            }                
+        }, function (err) {
+            if (err) {
+                if (err.toString().indexOf('E11000') > -1) {
+                    err = new Error('Username already registered');
+                }
+                res.status(400);
+                return res.send({ reason: err.toString() });
             }
-            res.status(400);
-            return res.send({ reason: err.toString() });
-        }
-        res.send(req.user);
-    });
+            res.send(req.user);
+        });
+    }
+    else {
+        User.update({ _id: userID }, { $set: userData }, function (err) {
+            if (err) {
+                if (err.toString().indexOf('E11000') > -1) {
+                    err = new Error('Username already registered');
+                }
+                res.status(400);
+                return res.send({ reason: err.toString() });
+            }
+            res.send(req.user);
+        });
+    }
 };

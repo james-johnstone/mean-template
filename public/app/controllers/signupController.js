@@ -2,11 +2,13 @@
 
     $scope.signup = function () {
         var newUserData = {
-            email: $scope.email,
-            userName: $scope.userName,
-            password: $scope.password,
-            firstName: $scope.firstName,
-            lastName: $scope.lastName
+            local: {
+                email: $scope.email,
+                userName: $scope.userName,
+                password: $scope.password,
+                firstName: $scope.firstName,
+                lastName: $scope.lastName
+            }
         };
 
         authService.createUser(newUserData).then(function () {

@@ -2,12 +2,12 @@
     $scope.user = userService.get({ id: $routeParams.id });
 
     $scope.addRole = function () {
-        if ($scope.user.roles.indexOf("") === -1)
-            $scope.user.roles.push("");
+        if ($scope.user.local.roles.indexOf("") === -1)
+            $scope.user.local.roles.push("");
     };
 
     $scope.removeRole = function (index) {
-        $scope.user.roles.splice(index, 1);
+        $scope.user.local.roles.splice(index, 1);
     };
 
     $scope.update = function () {

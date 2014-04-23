@@ -1,6 +1,6 @@
 ﻿ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
     li.dropdown
-        a.dropdown-toggle(data-toggle="dropdown" href="#") {{identity.currentUser.userName || identity.currentUser.email }}
+        a.dropdown-toggle(data-toggle="dropdown" href="#") {{identity.currentUser.local.userName || identity.currentUser.local.email }}
             b.caret
         ul.dropdown-menu
             li
