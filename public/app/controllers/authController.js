@@ -6,7 +6,8 @@
 
         authService.authenticateUser(email, password).then(function (success) {
             if (success) {
-                appNotifier.notify('You have sucessfully logged in', true);
+                $location.path("/");
+                appNotifier.notify('You have sucessfully logged in', true);               
             }
             else {
                 appNotifier.notify('invalid email / password', false);

@@ -19,6 +19,9 @@ footer {
 .toastr-top-right {
   top: 70px;
 }
+.auth-area a {
+  margin: 4px;
+}
 .toast-success {
   background-colSor: #13987e;
 }

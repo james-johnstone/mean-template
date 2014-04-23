@@ -8,7 +8,25 @@ var userSchema = mongoose.Schema({
     email: { type: String, required: '{PATH} is required', lowercase: true, trim: true, unique: true },
     salt: String,
     hashedPassword: { type: String, required: 'Password is required' },
-    roles: [String]
+    roles: [String],
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
+    },
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    }
 });
 
 userSchema.methods = {
