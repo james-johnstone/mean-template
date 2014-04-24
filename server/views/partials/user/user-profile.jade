@@ -4,7 +4,7 @@
 			.well
 				h3.fa.fa-user  Local Profile
 				form.form-horizontal(name="profileForm")
-					fieldset(ng-show="!!user.local.email")
+					fieldset(ng-show="!!user.local.salt")
 						legend
 						.form-group
 							label.col-md-2.control-label First Name
@@ -28,7 +28,7 @@
 									button.btn.btn-primary(ng-click="update()", ng-disabled="profileForm.$invalid") Update
 									| 
 									a.btn.btn-default(href="/") Cancel
-				fieldset(ng-show="!user.local.email")
+				fieldset(ng-show="!user.local.salt")
 						legend
 						.form-group
 							.col-md-6.col
@@ -63,7 +63,8 @@
 							.col-md-6.col
 								.pull-right
 									a.btn.btn-warning(href="/connect/facebook", target="_self") Connect Facebook
-
+	
+	.row
 		.col-sm-6
 			.well
 				h3.text-danger.fa.fa-google-plus   Google

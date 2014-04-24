@@ -48,8 +48,9 @@ exports.updateUser = function (req, res) {
 
     var userID = userData._id;
     delete userData._id;
-     
-    if (req.user.local.email !== userData.local.email && !req.user.hasRole('admin')) {
+
+    //!= needed for cast to string
+    if (req.user._id != userID && !req.user.hasRole('admin')) {
         res.status(403);
         return res.end();
     }
