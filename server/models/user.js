@@ -5,10 +5,10 @@ var userSchema = mongoose.Schema({
     local: {
         firstName: String,
         lastName: String,
-        userName: { type: String, required: '{PATH} is required', unique: true },
-        email: { type: String, required: '{PATH} is required', lowercase: true, trim: true, unique: true },
+        userName: { type: String, unique: true, trim: true, sparse: true },
+        email: { type: String, lowercase: true, trim: true, unique: true, sparse: true },
         salt: String,
-        hashedPassword: { type: String, required: 'Password is required' },
+        hashedPassword: { type: String },
         roles: [String]
     },
     facebook: {

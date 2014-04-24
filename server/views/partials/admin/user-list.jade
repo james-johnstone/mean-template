@@ -14,6 +14,7 @@
 				th Last Name
 				th User Name
 				th Email
+				th Profiles
 				th Edit
 		tr(ng-repeat="user in users | filter:searchText | orderBy:sortOrder")
 			td {{user._id}}
@@ -21,6 +22,11 @@
 			td {{user.local.lastName}}
 			td {{user.local.userName}}
 			td {{user.local.email}}
+			td 
+				.fa.fa-user(ng-show="!!user.local.salt") &nbsp;
+				.fa.fa-facebook(ng-show="!!user.facebook") &nbsp;
+				.fa.fa-twitter(ng-show="!!user.twitter") &nbsp;
+				.fa.fa-google-plus(ng-show="!!user.google")
 			td
 				button.btn.btn-info(ng-click="editUser(user)")
 	div page {{ currentPage+1 }} / {{numberOfPages()}}

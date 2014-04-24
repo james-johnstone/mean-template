@@ -32,6 +32,10 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             templateUrl: '/partials/home/signup',
             controller: 'signupController'
         })
+        .when('/connect/local', {
+            templateUrl: '/partials/user/connect-local',
+            resolve: routeRoleChecks.user
+        })
         .when('/admin/users', {
             templateUrl: '/partials/admin/user-list',
             controller: 'adminUsersController',
