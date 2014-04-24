@@ -1,7 +1,7 @@
 ﻿angular.module('app').controller('adminUsersController', function ($scope, $location, userService) {
 
     $scope.users = userService.query();
-    $scope.sortOptions = [{ value: "email", text: "sort by email" }, { value: "userName", text: "sort by username" }];
+    $scope.sortOptions = [{ value: "local.email", text: "sort by email" }, { value: "local.userName", text: "sort by username" }];
     $scope.sortOrder = $scope.sortOptions[0].value
 
     $scope.currentPage = 0;
