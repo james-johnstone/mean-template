@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
         userName: { type: String, unique: true, trim: true, sparse: true },
         email: { type: String, lowercase: true, trim: true, unique: true, sparse: true },
         salt: String,
-        hashedPassword: { type: String },
+        hashedPassword: String,
         roles: [String]
     },
     facebook: {

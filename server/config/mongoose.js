@@ -12,7 +12,5 @@ module.exports = function (config) {
     });
 
     userModel.createDefaultUsers();
-    wordModel.createDefaultWords();
-    languageModel.createDefaultLanguages();
 };
 

@@ -1,10 +1,10 @@
-﻿var express = require('express'),
-    passport = require('passport'),
-    stylus = require('stylus'),
-    morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    expressSession = require('express-session');
+﻿var express         = require('express'),
+    passport        = require('passport'),
+    stylus          = require('stylus'),
+    morgan          = require('morgan'),
+    bodyParser      = require('body-parser'),
+    cookieParser    = require('cookie-parser'),
+    expressSession  = require('express-session');
 
 module.exports = function (app, config) {
 
