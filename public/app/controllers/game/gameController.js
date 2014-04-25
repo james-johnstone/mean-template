@@ -1,6 +1,8 @@
 angular.module('app').controller('gameController', function ($scope, wordService, languageService, $timeout, $animate) {
 
     $scope.wordIsLoading = false;
+    $scope.wordScore = 20;
+    $scope.gameScore = 0;
 
     $scope.words = wordService.query(function (words) {
         $scope.languages = languageService.query(function (languages) {
@@ -45,12 +47,15 @@ angular.module('app').controller('gameController', function ($scope, wordService
 
     $scope.nextGameWord = function () {
         $scope.wordIsLoading = true;
+        $scope.wordScore = 20;
         $timeout($scope.enableNextWord, 2000);
+
         if ($scope.gameWords.length > 0) {
             $scope.resetGameWord($scope.gameWords);
         }
         else {
             $scope.resetGameWord($scope.words);
+            $scope.gameScore = 0;
         }
     };
 
@@ -62,11 +67,11 @@ angular.module('app').controller('gameController', function ($scope, wordService
         root['rootIsSelected'] = !root['rootIsSelected'];
 
         if ($scope.activeWord.rootLanguage._id !== root._id) {
-            console.log('wrong root picked!');
+            $scope.wordScore -= 10;
         }
         else {
-            $timeout($scope.fadeToEty, 1000);            
-            console.log('correct root picked!');
+            $scope.gameScore += $scope.wordScore;
+            $timeout($scope.fadeToEty, 1000);
         }
     };
 
@@ -74,6 +79,8 @@ angular.module('app').controller('gameController', function ($scope, wordService
 
     $scope.fadeToEty = function () {
         $scope.wordIsAnswered = true;
+
+        $timeout($scope.nextGameWord, 3000);
     };
 
 });

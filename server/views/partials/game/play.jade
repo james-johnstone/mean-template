@@ -1,9 +1,12 @@
 .container
 	.well
-		h3.text-center select the root language of
+		h3.text-center.animated(fade-out="currentWordIndex !== 1") select the root language of
 
-		div.game-active-word-container.text-center.border
-			div.game-active-word {{activeWord.word}}
+		div.game-score.pull-right Current Score: {{gameScore}}
+
+		div.game-active-word-container.text-center
+			div.game-active-word 
+				strong {{activeWord.word}}
 
 		div.answer-container
 			div.animated.roots-container.root-cards-animation(ng-hide="wordIsAnswered")
