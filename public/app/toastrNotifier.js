@@ -10,7 +10,6 @@ angular.module('app').factory('appNotifier', function (toastrNotifier) {
             {
                 toastrNotifier.error(message);
             }
-            console.log(message);
         }
     };
 });
