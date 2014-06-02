@@ -12,7 +12,8 @@ module.exports = function (app, config) {
         return stylus(str).set('filename', path);
     }
 
-    app.set('views', config.rootPath + 'server\\views');
+    //app.set('views', config.rootPath + 'server\\views');
+    app.set('views', config.rootPath + '/server/views');
     app.set('view engine', 'jade');
 
     app.use(morgan('dev'));
