@@ -47,7 +47,7 @@ module.exports = function (app, passport) {
     //====================================================================
     app.get('/partials/*', function (req, res) {
         //res.render(path.normalize(req.url));
-        res.render('partials/' + req.params);
+        res.render('partials/' + req.params[0]);
     });
     
     //====================================================================
