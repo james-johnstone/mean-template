@@ -19,6 +19,7 @@ exports.getWord = function (req, res) {
 };
 
 exports.updateWord = function (req, res) {
+    // pull object id out of the req.body so we don't throw it to mongo update
     var wordId = req.body._id;
     var wordData = req.body;
     delete wordData._id;
@@ -38,9 +39,8 @@ exports.updateWord = function (req, res) {
 };
 
 exports.createWord = function (req, res) {
-    var wordData = req.body;
 
-    Word.create(wordData, function (err, word) {
+    Word.create(req.body, function (err, word) {
         if (err) {
             if (err.toString().indexOf('E11000') > -1) {
                 err = new Error('Word already created');

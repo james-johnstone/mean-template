@@ -23,29 +23,6 @@ exports.authenticate = function (req, res, next) {
     auth(req, res, next);
 };
 
-
-//exports.authenticateFacebook = function (req, res, next) {
-
-//    var auth = passport.authenticate('facebook', function (err, user) {
-//        if (err) {
-//            return next(err);
-//        }
-//        if (!user) {
-//            res.send({ success: false });
-//        }
-//        else {
-//            req.logIn(user, function (err) {
-//                if (err) {
-//                    return next(err);
-//                }
-//                res.send({ success: true, user: user });
-//            });
-//        }
-//    });
-//    auth(req, res, next);
-//};
-
-
 exports.requiresApiLogin = function (req, res, next) {
     if (!req.isAuthenticated()) {
         res.status(403);
@@ -69,7 +46,6 @@ exports.requiresRole = function (role) {
 };
 
 exports.config = {
-
     'facebookAuth': {
         'clientID': '674095555959783',
         'clientSecret': '3306c54cbf918e5b715b9d3c31e87010',
@@ -87,5 +63,4 @@ exports.config = {
         'clientSecret': 'hJL6KUcRhnUuMxfwrfqYa1fK',
         'callbackURL': 'http://localhost:3030/auth/google/callback'
     }
-
 };

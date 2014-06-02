@@ -58,6 +58,7 @@ exports.updateUser = function (req, res) {
     User.update({ _id: userID }, { $set: userData }, function (err) {
         if (err) {
             if (err.toString().indexOf('E11000') > -1) {
+                console.log(err.toString());
                 err = new Error('Username already registered');
             }
             res.status(400);

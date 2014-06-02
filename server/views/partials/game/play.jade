@@ -16,7 +16,7 @@
 							button.game-root-language-container.border.front(ng-click="selectRoot(root)") {{root.name}}
 						.card.back
 							button.game-root-language-container.border(ng-class="root.isRoot ? 'btn-success' : 'btn-danger'")
-			div.animated.etymology-container.root-etymology-animation.text-center(ng-show="wordIsAnswered", fade-out="wordIsLoading")
+			div.animated.etymology-container.root-etymology-animation.text-center(ng-show="wordIsAnswered")
 				em.well-etymology {{activeWord.synopsis}}
 
 		div word {{currentWordIndex}} of {{words.length}}

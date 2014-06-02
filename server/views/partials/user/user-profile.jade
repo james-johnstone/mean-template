@@ -17,7 +17,7 @@
 						.form-group
 							label.col-md-2.control-label User Name
 							.col-md-6
-								input.form-control(name="userName", type="text", placeholder="User Name", ng-model="user.local.userName", required)
+								input.form-control(name="userName", type="text", placeholder="User Name", ng-model="user.local.userName", required,ng-minlength="3" ng-maxlength="10")
 						.form-group
 							label.col-md-2.control-label Email
 							.col-md-6

@@ -6,13 +6,13 @@
 				legend
 				.form-group
 					.col-md-6
-						input.form-control(name="userName", type="text", placeholder="User Name", ng-model="userName", required)
+						input.form-control(name="userName", type="text", placeholder="User Name", ng-model="userName", required, autofocus,ng-minlength="4" ng-maxlength="10")
 				.form-group
 					.col-md-6
 						input.form-control(name="email", type="email", placeholder="Email", ng-model="email", required)
 				.form-group
 					.col-md-6
-						input.form-control(name="password", type="password", placeholder="Password", ng-model="password", required)
+						input.form-control(name="password", type="password", placeholder="Password", ng-model="password", required,ng-minlength="6")
 				.form-group
 					.col-md-6.col
 						.pull-right

@@ -1,8 +1,8 @@
 angular.module('app').controller('gameController', function ($scope, wordService, languageService, $timeout, $animate) {
 
-    $scope.wordIsLoading = false;
     $scope.wordScore = 20;
     $scope.gameScore = 0;
+    $scope.rootsIsHidden = false;
 
     $scope.words = wordService.query(function (words) {
         $scope.languages = languageService.query(function (languages) {
@@ -12,10 +12,12 @@ angular.module('app').controller('gameController', function ($scope, wordService
 
     $scope.resetGameWord = function (words) {
         $scope.wordIsAnswered = false;
+        $scope.wordScore = 20;
+
         $scope.gameWords = words.concat();
         $scope.gameLanguages = $scope.languages.concat();
 
-        $scope.activeWord = $scope.gameWords[Math.floor(Math.random() * $scope.gameWords.length)];
+        $scope.activeWord = $scope.getRandomElement($scope.gameWords); 
         $scope.gameWords.splice($scope.gameWords.indexOf($scope.activeWord), 1);
 
         $scope.rootLanguage = $scope.activeWord.rootLanguage;
@@ -30,26 +32,20 @@ angular.module('app').controller('gameController', function ($scope, wordService
             return language.languageCategory === $scope.activeWord.rootLanguage.languageCategory;
         });
 
-        $scope.similarRoot = $scope.similarRoots[Math.floor(Math.random() * $scope.similarRoots.length)];
+        $scope.similarRoot = $scope.getRandomElement($scope.similarRoots);
         $scope.gameLanguages.splice($scope.gameLanguages.indexOf($scope.similarRoot, 1));
-        $scope.randomRoot = $scope.gameLanguages[Math.floor(Math.random() * $scope.gameLanguages.length)];
+        $scope.randomRoot = $scope.getRandomElement($scope.gameLanguages);
 
-        $scope.rootLanguage['rootIsSelected'] = false;
-        $scope.similarRoot['rootIsSelected'] = false;
-        $scope.randomRoot['rootIsSelected'] = false;        
+        $scope.languageTempArray = [];
+        $scope.languageTempArray.push($scope.rootLanguage);
+        $scope.languageTempArray.push($scope.similarRoot);
+        $scope.languageTempArray.push($scope.randomRoot);
 
-        $scope.possibleLanguages.push($scope.rootLanguage);
-        $scope.possibleLanguages.push($scope.similarRoot);
-        $scope.possibleLanguages.push($scope.randomRoot);        
-
+        $scope.possibleLanguages = $scope.randomizeLanguageArray($scope.languageTempArray);
         $scope.currentWordIndex = $scope.words.length - $scope.gameWords.length;
     };
 
     $scope.nextGameWord = function () {
-        $scope.wordIsLoading = true;
-        $scope.wordScore = 20;
-        $timeout($scope.enableNextWord, 2000);
-
         if ($scope.gameWords.length > 0) {
             $scope.resetGameWord($scope.gameWords);
         }
@@ -57,10 +53,6 @@ angular.module('app').controller('gameController', function ($scope, wordService
             $scope.resetGameWord($scope.words);
             $scope.gameScore = 0;
         }
-    };
-
-    $scope.enableNextWord = function () {
-        $scope.wordIsLoading = false;
     };
 
     $scope.selectRoot = function (root) {
@@ -75,26 +67,40 @@ angular.module('app').controller('gameController', function ($scope, wordService
         }
     };
 
-    $scope.rootsIsHidden = false;
-
     $scope.fadeToEty = function () {
         $scope.wordIsAnswered = true;
 
         $timeout($scope.nextGameWord, 3000);
     };
 
+    $scope.getRandomElement = function (array) {
+        return array[Math.floor(Math.random() * array.length)];
+    };
+
+    $scope.randomizeLanguageArray = function (array) {
+
+        var newArray = [];
+
+        for (i = 0; i < 3; i++) {
+            var element = $scope.getRandomElement(array);
+            array.splice(array.indexOf(element), 1);
+
+            element['rootIsSelected'] = false;
+            newArray.push(element);            
+        }
+
+        return newArray;
+    };
 });
 
 angular.module('app').directive('flip', function ($animate) {
     return function (scope, element, attrs) {
         scope.$watch(attrs.flip, function (newVal) {
             if (newVal) {
-                $animate.addClass(element, "rotate-3d");
-                event.preventDefault();
+                $animate.addClass(element, "rotate-3d");               
             }
             else {
-                $animate.removeClass(element, "rotate-3d");
-                event.preventDefault();
+                $animate.removeClass(element, "rotate-3d");                
             }
         });
     };
@@ -104,10 +110,10 @@ angular.module('app').directive('fadeOut', function ($animate) {
     return function (scope, element, attrs) {
         scope.$watch(attrs.fadeOut, function (newVal) {
             if (newVal) {
-                $animate.addClass(element, "fadeOut");
+                $animate.addClass(element, "fadeOutFast");
             }
             else {
-                $animate.removeClass(element, "fadeOut");
+                $animate.removeClass(element, "fadeOutFast");
             }
         });
     };

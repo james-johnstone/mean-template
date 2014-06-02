@@ -6,14 +6,3 @@ var languageSchema = mongoose.Schema({
 });
 
 var Language = mongoose.model('Language', languageSchema);
-
-function createDefaultLanguages() {
-    Language.find({}).exec(function (err, collection) {
-        if (collection.length === 0) {
-            Language.create({ name: 'french', languageCategory: 'romantics' });
-            Language.create({ name: 'latin', languageCategory: 'ancient' });
-        }
-    });
-}
-
-exports.createDefaultLanguages = createDefaultLanguages

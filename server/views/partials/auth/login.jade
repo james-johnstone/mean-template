@@ -1,10 +1,10 @@
 ﻿.container
-	.well		
+	.well
 		h1.fa.fa-sign-in Login
 
 		form
 			.form-group
-				input.form-control(placeholder="Email", ng-model="username")
+				input.form-control(placeholder="Email", ng-model="username", autofocus)
 			.form-group
 				input.form-control(type="password", placeholder="Password", ng-model="password")
 			button.btn.btn-warning.btn-lg(ng-click="login(username,password)") Login
