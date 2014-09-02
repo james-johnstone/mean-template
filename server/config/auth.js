@@ -48,19 +48,19 @@ exports.requiresRole = function (role) {
 exports.config = {
     'facebookAuth': {
         'clientID': '674095555959783',
-        'clientSecret': '',
+        'clientSecret': '3306c54cbf918e5b715b9d3c31e87010',
         'callbackURL': 'http://desolate-coast-5998.herokuapp.com/auth/facebook/callback'
     },
 
     'twitterAuth': {
         'consumerKey': '5uJ8VhXzLmKmkdkhfmJZvWDW4',
-        'consumerSecret': '',
+        'consumerSecret': 'qGKgjcrsiYQsK0LY35wy7LmPr36wb1vLo1kH6RWzZbYYOyaED4',
         'callbackURL': 'http://desolate-coast-5998.herokuapp.com/auth/twitter/callback'
     },
 
     'googleAuth': {
         'clientID': '718084310608-qhrf5gb57jcj0kucnk6777cc5sn5lnte.apps.googleusercontent.com',
-        'clientSecret': '',
+        'clientSecret': 'hJL6KUcRhnUuMxfwrfqYa1fK',
         'callbackURL': 'http://desolate-coast-5998.herokuapp.com/auth/google/callback'
     }
 };
