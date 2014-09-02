@@ -118,8 +118,8 @@ select {
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
   -webkit-transform-origin-x: 50%;
-  transform-origin: 20% 40%;
-  -ms-transform-origin: 20% 40%;
+  transform-origin: 50% 40%;
+  -ms-transform-origin: 50% 40%;
 /* IE 9 */
 }
 .wrong-card {
