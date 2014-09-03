@@ -1,12 +1,13 @@
-﻿var auth                = require('./auth'),
-    path                = require('path'),
-    mongoose            = require('mongoose'),
-    User                = mongoose.model('User'),
-    Word                = mongoose.model('Word'),
-    Language            = mongoose.model('Language'),
-    userController      = require('../controllers/users'),
-    wordController      = require('../controllers/words'),
-    languageController  = require('../controllers/languages');
+﻿var auth                        = require('./auth'),
+    path                        = require('path'),
+    mongoose                    = require('mongoose'),
+    User                        = mongoose.model('User'),
+    Word                        = mongoose.model('Word'),
+    Language                    = mongoose.model('Language'),
+    userController              = require('../controllers/users'),
+    wordController              = require('../controllers/words'),
+    languageController          = require('../controllers/languages'),
+    learningProgressController  = require('../controllers/learningProgress');
 
 module.exports = function (app, passport) {
 
@@ -41,6 +42,19 @@ module.exports = function (app, passport) {
     app.route('/api/languages/:id')
         .delete(auth.requiresRole('admin'), languageController.deleteLanguage)
         .get(auth.requiresRole('admin'), languageController.getLanguage);
+
+    //-- learningProgresss
+    app.route('/api/learningProgress')
+        .get(learningProgressController.getLearningProgresses)
+        .put(learningProgressController.updateLearningProgress)
+        .post(learningProgressController.createLearningProgress);
+
+    app.route('/api/learningProgress/:id')
+        .delete(auth.requiresRole('admin'), learningProgressController.deleteLearningProgress)
+        .get(learningProgressController.getLearningProgress);
+
+    app.route('/api/user/learningProgress/:id')      
+        .get(learningProgressController.getLearningProgressByUser);
     
     //====================================================================
     // PARTIALS ROUTE

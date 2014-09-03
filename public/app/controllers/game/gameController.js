@@ -1,12 +1,17 @@
-angular.module('app').controller('gameController', function ($scope, wordService, languageService, $timeout, $animate) {
+angular.module('app').controller('gameController', function ($scope, wordService, languageService, userLearningProgressService, identity, learningProgressResource, $timeout, $animate) {
 
     $scope.wordScore = 20;
     $scope.gameScore = 0;
     $scope.rootsIsHidden = false;
+    $scope.learningProgres = [];
+
+    $scope.user = identity.currentUser;    
+    if (!!$scope.user)
+        $scope.learningProgress = userLearningProgressService.get({ id: $scope.user._id });
 
     $scope.words = wordService.query(function (words) {
         $scope.languages = languageService.query(function (languages) {
-            $scope.resetGameWord(words);
+                $scope.resetGameWord(words);
         });
     });
 
@@ -43,6 +48,11 @@ angular.module('app').controller('gameController', function ($scope, wordService
 
         $scope.possibleLanguages = $scope.randomizeLanguageArray($scope.languageTempArray);
         $scope.currentWordIndex = $scope.words.length - $scope.gameWords.length;
+
+        if (!!$scope.user){
+            $scope.activeLearningProgress = $scope.getLearningProgress($scope.activeWord); 
+            $scope.UpdateLearningProgress($scope.activeLearningProgress);
+        }
     };
 
     $scope.nextGameWord = function () {
@@ -63,6 +73,7 @@ angular.module('app').controller('gameController', function ($scope, wordService
         }
         else {
             $scope.gameScore += $scope.wordScore;
+            $scope.UpdateLearningProgressAnswered($scope.activeLearningProgress);
             $timeout($scope.fadeToEty, 1000);
         }
     };
@@ -90,6 +101,37 @@ angular.module('app').controller('gameController', function ($scope, wordService
         }
 
         return newArray;
+    };
+
+    $scope.getLearningProgress = function (word) {
+        if (!!$scope.learningProgress) {
+            return $scope.learningProgress.filter(function (progress) {
+                return progress.word == word._id;
+            })[0] || $scope.createNewLearningProgress();;
+        }
+        return $scope.createNewLearningProgress();
+    }
+
+    $scope.createNewLearningProgress = function(){
+        var progress = {
+            word: $scope.activeWord._id,
+            user: $scope.user._id,
+            timesSeen: 0,
+            correctAnswers: 0,    
+        };
+        learningProgressResource.createLearningProgress(progress);
+        $scope.learningProgress.push(progress);
+        return progress;
+    }
+
+    $scope.UpdateLearningProgress = function (learningProgress) {
+        learningProgress.timesSeen++;
+        learningProgressResource.updateLearningProgress(learningProgress);
+    };
+
+    $scope.UpdateLearningProgressAnswered = function (learningProgress) {
+        learningProgress.correctAnswers++;
+        learningProgressResource.updateLearningProgress(learningProgress);
     };
 });
 

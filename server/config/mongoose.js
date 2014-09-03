@@ -1,7 +1,8 @@
-﻿var mongoose = require('mongoose'),
-    userModel = require('../models/user'),
-    wordModel = require('../models/word'),
-    languageModel = require('../models/language');
+﻿var mongoose                = require('mongoose'),
+    userModel               = require('../models/user'),
+    wordModel               = require('../models/word'),
+    languageModel           = require('../models/language'),
+    learningProgressModel   = require('../models/learningProgress');
 
 module.exports = function (config) {
     mongoose.connect(config.db);
